@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách điểm danh</title>
+</head>
+<body>
+    <h1>Danh sách điểm danh</h1>
+    <table border="1">
+        <tr>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Thời gian điểm danh</th>
+            <th>Trạng thái</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.MSSV }}</td>
+            <td>{{ student.ho_ten }}</td>
+            <td>{{ student.thoi_gian }}</td>
+            <td>{{ student.trang_thai }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

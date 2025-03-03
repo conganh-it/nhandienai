@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang sinh viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            text-align: center;
+        }
+
+        .container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        h2 {
+            background: linear-gradient(to right, #2a9d8f, #264653);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2a9d8f;
+            color: white;
+        }
+
+        .btn {
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #21867a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Trang điểm danh của bạn</h2>
+
+        <div>
+            <img src="{{ url_for('video_feed') }}" width="50%">
+        </div>
+
+        <button class="btn" onclick="diemDanh()">Điểm danh</button>
+
+        <h3>Thông tin điểm danh của bạn</h3>
+        <table>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ tên</th>
+                <th>Thời gian điểm danh</th>
+                <th>Trạng thái</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.MSSV }}</td>
+                <td>{{ student.ho_ten }}</td>
+                <td id="time_{{ student.MSSV }}">{{ student.thoi_gian }}</td>
+                <td id="status_{{ student.MSSV }}">{{ student.trang_thai }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{{ url_for('logout') }}">Đăng xuất</a>
+    </div>
+
+    <script>
+        function diemDanh() {
+            fetch('/diemdanh', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === 'success') {
+                    const detectedName = "{{ session['username'] }}";
+                    const currentTime = new Date().toLocaleString();
+                    document.getElementById(`time_${detectedName}`).innerText = currentTime;
+                    document.getElementById(`status_${detectedName}`).innerText = "Đúng giờ";
+                }
+            })
+            .catch(error => console.error('Lỗi:', error));
+        }
+    </script>
+
+</body>
+</html>

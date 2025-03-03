@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang quản lý điểm danh - Giáo viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .logout {
+            background: #dc3545;
+        }
+        .logout:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trang quản lý điểm danh dành cho giáo viên</h1>
+
+    <h2>Danh sách điểm danh</h2>
+    <table>
+        <tr>
+            <th>MSSV</th>
+            <th>Họ tên</th>
+            <th>Thời gian điểm danh</th>
+            <th>Trạng thái</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.MSSV }}</td>
+            <td>{{ student.ho_ten }}</td>
+            <td>{{ student.thoi_gian }}</td>
+            <td>{{ student.trang_thai }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/diemdanh_list" class="btn">Xem chi tiết điểm danh</a>
+    <a href="/" class="btn logout">Đăng xuất</a>
+</body>
+</html>
