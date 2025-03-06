@@ -32,6 +32,7 @@ Dự án này phát triển một hệ thống giám sát an ninh sử dụng m�
 3. Thay `TOKEN` và `CHAT_ID` trong mã nguồn:
     - `TOKEN`: Lấy từ [BotFather trên Telegram](https://core.telegram.org/bots#botfather).
     - `CHAT_ID`: ID của nhóm hoặc người dùng trên Telegram mà bạn muốn nhận cảnh báo.
+ 4. link yolo: https://miai.vn/?s=YOLO
 
 ## Các Lệnh Bot Telegram
 
